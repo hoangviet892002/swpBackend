@@ -185,7 +185,9 @@ class AuthController {
     try {
       const data = req.body;
       const { signature, phone, tranId, ackTime, partnerId, partnerName, amount, comment } = data;
-      console.log("Data received and processed successfully.");
+      console.log(phone);
+      console.log(amount);
+      console.log(comment);
       res.status(200).json({ message: 'Data received and processed successfully.' });
     } catch (error) {
       console.error('Error:', error);
