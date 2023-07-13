@@ -213,7 +213,7 @@ class AuthController {
 
       // Cập nhật giá trị balance của khách hàng
       const newBalance = customer.balance + amount;
-      await Customer.findOneAndUpdate({ where: { id: x } }, { balance: newBalance });
+      await Customer.update({ balance: newBalance }, { where: { id: x } });
 
       // Tiếp tục xử lý dữ liệu
 
