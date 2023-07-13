@@ -6,6 +6,7 @@ const customerController = require('./User/CustomerController');
 const Customer = require('../Models/Users/Customers');
 const Doctor = require('../Models/Users/Doctors');
 const Admin = require('../Models/Users/Admins');
+const Transaction = require('../Models/Clinic/Transaction');
 const OAuth2 = require('../oauth2google');
 
 
@@ -31,7 +32,7 @@ class AuthController {
 
       const token = user
 
-      return res.status(200).json({ message: 'Login successful', token});
+      return res.status(200).json({ message: 'Login successful', token });
     } catch (error) {
       console.error(error);
       return res.status(500).json({ error: 'Internal server error' });
@@ -83,7 +84,7 @@ class AuthController {
       return res.status(500).json({ error: 'Internal server error' });
     }
   }
-  
+
 
   async forgotPassword(req, res) {
     try {
@@ -150,31 +151,31 @@ class AuthController {
       return res.status(500).json({ error: 'Internal server error' });
     }
   }
-  
+
   async changepass(req, res) {
     try {
       const { email, password, newPassword } = req.body;
-  
+
       const customer = await Customer.findOne({ where: { email } });
       const doctor = await Doctor.findOne({ where: { email } });
       const admin = await Admin.findOne({ where: { email } });
       const user = customer || doctor || admin;
-  
+
       if (!user) {
         return res.status(400).json({ error: 'User not found' });
       }
-  
+
       const isPasswordValid = await bcrypt.compare(password, user.password);
-  
+
       if (!isPasswordValid) {
         return res.status(400).json({ error: 'Invalid password' });
       }
-  
+
       // Thay đổi mật khẩu của user
       const hashedNewPassword = await bcrypt.hash(newPassword, 10);
       user.password = hashedNewPassword;
       await user.save();
-  
+
       return res.status(200).json({ message: 'Password changed successfully' });
     } catch (error) {
       console.error(error);
@@ -185,16 +186,44 @@ class AuthController {
     try {
       const data = req.body;
       const { signature, phone, tranId, ackTime, partnerId, partnerName, amount, comment } = data;
-      console.log(phone);
-      console.log(amount);
-      console.log(comment);
-      res.status(200).json({ message: 'Data received and processed successfully.' });
+      // Tạo giao dịch mới
+      const transaction = await Transaction.create({
+        partnerId,
+        amount,
+        comment,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      });
+
+      // Kiểm tra cấu trúc của comment: "nap tien x"
+      const regex = /^nap tien (\d+)$/;
+      const match = comment.match(regex);
+      if (!match) {
+        return res.status(400).json({ error: 'Invalid comment format. Please use "nap tien x" format.' });
+      }
+
+      const x = parseInt(match[1]); // Lấy giá trị x từ kết quả match
+
+      // Tìm khách hàng dựa trên giá trị x là khóa chính
+      const customer = await Customer.findOne({ where: { id: x } });
+
+      if (!customer) {
+        return res.status(404).json({ error: 'Customer not found.' });
+      }
+
+      // Cập nhật giá trị balance của khách hàng
+      const newBalance = customer.balance + amount;
+      await Customer.findOneAndUpdate({ where: { id: x } }, { balance: newBalance });
+
+      // Tiếp tục xử lý dữ liệu
+
+      res.status(200).json({ message: 'Data received and processed successfully.', newBalance });
     } catch (error) {
       console.error('Error:', error);
-    res.status(500).json({ error: 'An error occurred during processing.' });
+      res.status(500).json({ error: 'An error occurred during processing.' });
     }
   }
-  
+
 
 }
 

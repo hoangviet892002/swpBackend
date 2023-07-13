@@ -5,6 +5,7 @@ const roomRouter = require('./RoomRouter');
 const slotRouter = require('./SlotRouter');
 const treatment_profileRouter = require('./Treatment_profileRouter');
 const treatment_inRouter = require('./Treatment_InRouter');
+const TransactionRouter = require('./TransactionRouter');
 const admin = require('./admin');
 
 
@@ -22,6 +23,7 @@ function route(app) {
     app.use('/api/treatment_profile', treatment_profileRouter);
 
     app.use('/api/treatmentin', treatment_inRouter);
+    app.use('/api/transaction', TransactionRouter);
 
     // api for admin
     app.use('/api/admin', admin);
