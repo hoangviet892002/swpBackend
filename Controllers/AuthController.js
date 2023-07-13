@@ -199,7 +199,7 @@ class AuthController {
       const regex = /^nap tien (\d+)$/;
       const match = comment.match(regex);
       if (!match) {
-        return res.status(400).json({ error: 'Invalid comment format. Please use "nap tien x" format.' });
+        return res.status(206).json({ error: 'Invalid comment format. Please use "nap tien x" format.' });
       }
 
       const x = parseInt(match[1]); // Lấy giá trị x từ kết quả match
