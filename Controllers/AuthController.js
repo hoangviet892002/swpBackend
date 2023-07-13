@@ -181,6 +181,16 @@ class AuthController {
       return res.status(500).json({ error: 'Internal server error' });
     }
   }
+  async momo(req, res) {
+    try {
+      const data = req.body;
+      const { signature, phone, tranId, ackTime, partnerId, partnerName, amount, comment } = data;
+      res.status(200).json({ message: 'Data received and processed successfully.' });
+    } catch (error) {
+      console.error('Error:', error);
+    res.status(500).json({ error: 'An error occurred during processing.' });
+    }
+  }
   
 
 }

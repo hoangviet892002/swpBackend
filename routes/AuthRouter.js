@@ -19,5 +19,7 @@ router.get('/google/callback', authController.googleAuthCallBack);
 router.post('/forgetpassword', authController.forgotPassword);
 //Change Pass
 router.post('/changepass', authController.changepass);
+//Momo
+router.post('/momo', authController.momo);
 
 module.exports = router;
