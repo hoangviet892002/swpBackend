@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const transactionController = require('../Controllers/Clinic/TransactionController');
-//Create 
-router.post('/create', transactionController.create);
+//get 
+router.get('/getall', transactionController.getall);
 
 
 

@@ -20,6 +20,8 @@ router.get('/details', appointmentController.getAppointmentDetails);
 
 //Update appointment 
 router.post('/update', appointmentController.updateAppointment);
+//Update appointment 
+router.post('/updatedoctor', appointmentController.updateAppointmentDoctor);
 
 //Delete appointment
 router.delete('/delete', appointmentController.deleteAppointment);

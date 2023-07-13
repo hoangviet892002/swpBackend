@@ -36,6 +36,10 @@ const Appointment = sequelize.define('Appointment', {
     type: DataTypes.STRING(50000),
     allowNull: true,
   },
+  amountValue: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
 }, {
   tableName: 'Appointments',
 });

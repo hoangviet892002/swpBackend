@@ -16,19 +16,19 @@ class CustomerController {
 
     async detail(req, res) {
         try {
-          const { id } = req.query;
-          const customer = await Customer.findOne({ where: { id } });
-          
-          if (!customer) {
-            return res.status(400).json({ error: 'User not found' });
-          }
-      
-          return res.status(200).json({ customer: customer });
+            const { id } = req.query;
+            const customer = await Customer.findOne({ where: { id } });
+
+            if (!customer) {
+                return res.status(400).json({ error: 'User not found' });
+            }
+
+            return res.status(200).json({ customer: customer });
         } catch (error) {
-          console.error(error);
-          return res.status(500).json({ error: 'Internal server error' });
+            console.error(error);
+            return res.status(500).json({ error: 'Internal server error' });
         }
-      }
+    }
 
     async create(req, res) {
         try {
@@ -60,27 +60,81 @@ class CustomerController {
         try {
             const { id } = req.query;
             const { fullname, email, address, phone, gender } = req.body;
-        
+
             const customer = await Customer.findByPk(id);
-        
+
             if (!customer) {
-              return res.status(400).json({ error: 'User not found' });
+                return res.status(400).json({ error: 'User not found' });
             }
-        
+
             customer.fullname = fullname;
             customer.email = email;
             customer.address = address;
             customer.phone = phone;
             customer.gender = gender;
-        
+
             await customer.save();
-        
+
             return res.status(200).json({ message: 'Update successfully' });
-          } catch (error) {
+        } catch (error) {
             console.error(error);
             return res.status(500).json({ error: 'Internal server error' });
-          }
+        }
     }
+    async subtractAmount(req, res) {
+        try {
+            const { customerId, amount } = req.body;
+
+            // Tìm khách hàng dựa trên customerId
+            const customer = await Customer.findByPk(customerId);
+
+            if (!customer) {
+                return res.status(200).json({ message: 'Khách hàng không tồn tại' });
+            }
+
+            // Kiểm tra số tiền cần trừ không vượt quá số dư hiện tại của khách hàng
+            if (amount > customer.balance) {
+                return res.status(200).json({ message: 'Số tiền trừ vượt quá số dư khách hàng' });
+            }
+
+            // Trừ số tiền khỏi số dư khách hàng
+            customer.balance -= amount;
+
+            // Lưu thay đổi vào cơ sở dữ liệu
+            await customer.save();
+
+            return res.status(200).json({ message: 'Trừ tiền thành công' });
+        } catch (error) {
+            console.error(error);
+            return res.status(200).json({ message: 'Lỗi server' });
+        }
+    }
+
+    async addAmount(req, res) {
+        try {
+            const { customerId, amount } = req.body;
+
+            // Tìm khách hàng dựa trên customerId
+            const customer = await Customer.findByPk(customerId);
+
+            if (!customer) {
+                return res.status(200).json({ message: 'Khách hàng không tồn tại' });
+            }
+
+            // Cộng số tiền vào số dư khách hàng
+            customer.balance += amount;
+
+            // Lưu thay đổi vào cơ sở dữ liệu
+            await customer.save();
+
+            return res.status(200).json({ message: 'Cộng tiền thành công' });
+        } catch (error) {
+            console.error(error);
+            return res.status(200).json({ message: 'Lỗi server' });
+        }
+    }
+
+
 
     async delete(req, res) {
         try {
