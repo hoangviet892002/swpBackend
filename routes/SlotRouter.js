@@ -135,7 +135,7 @@ module.exports = router;
 /**
  * @swagger
  * /api/slot/getDoctorByTime:
- *   get:
+ *   post:
  *     summary: Get Doctor by Time
  *     tags: [Slot]
  *     requestBody:
@@ -446,7 +446,7 @@ module.exports = router;
 /**
  * @swagger
  * /api/slot/delete/{id}:
- *   Delete:
+ *   delete:
  *     summary: Delete Slot
  *     tags: [Slot]
  *     parameters:

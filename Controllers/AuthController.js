@@ -113,7 +113,7 @@ class AuthController {
       // Gửi email xác nhận đổi mật khẩu
       const resetPasswordUrl = `http://your-frontend-url.com/reset-password?token=${resetToken}`;
 
-      mailer.sendMail(email, 'Reset Password', `Please click the following link to reset your password: ${resetPasswordUrl}`);
+      mailer.sendMail(email, 'Yêu cầu đặt lại mật khẩu', resetPasswordUrl);
 
       // Gửi email chứa mật khẩu mới đến người dùng
       res.json({ message: 'Email sent for password reset' });

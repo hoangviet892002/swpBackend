@@ -1,6 +1,7 @@
 const express = require('express');
 const session = require('express-session');
 const db = require('./database');
+const swaggerDocs = require('./utils/swagger');
 const cors = require('cors');
 
 const route = require('./routes');
@@ -12,6 +13,9 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 route(app);
+
+swaggerDocs(app);
+
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

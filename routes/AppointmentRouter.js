@@ -193,7 +193,7 @@ module.exports = router;
  * /api/appointment/appointmentdoctor:
  *   get:
  *     summary: Get Slot by ID
- *     tags: [Slot]
+ *     tags: [Appointment]
  *     parameters:
  *       - in: query
  *         name: doctorID
@@ -236,7 +236,7 @@ module.exports = router;
  * /api/appointment/details:
  *   get:
  *     summary: Get Appointment by ID
- *     tags: [Slot]
+ *     tags: [Appointment]
  *     parameters:
  *       - in: query
  *         name: id
@@ -375,7 +375,7 @@ module.exports = router;
  *     summary: Delete Appointment
  *     tags: [Appointment]
  *     parameters:
- *       - in: params
+ *       - in: path
  *         name: id
  *         schema:
  *           type: integer

@@ -173,7 +173,7 @@ module.exports = router;
  *     summary: Update Room
  *     tags: [Room]
  *     parameters:
- *       - in: params
+ *       - in: path
  *         name: id
  *         schema:
  *           type: integer
@@ -216,11 +216,11 @@ module.exports = router;
 /**
  * @swagger
  * /api/room/delete/{id}:
- *   Delete:
+ *   delete:
  *     summary: Delete Room
  *     tags: [Room]
  *     parameters:
- *       - in: params
+ *       - in: path
  *         name: id
  *         schema:
  *           type: integer

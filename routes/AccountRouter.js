@@ -251,7 +251,7 @@ module.exports = router;
  *         application/json:
  *           schema:
  *             type: object
- *               properties:
+ *             properties:
  *                  fullname:
  *                      type: string
  *                  email:
