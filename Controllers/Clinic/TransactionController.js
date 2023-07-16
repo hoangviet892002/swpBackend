@@ -11,9 +11,6 @@ class TransactionController {
       return res.status(500).json({ error: 'An error occurred while retrieving transactions' });
     }
   }
-
-  
-  
 }
 
 module.exports = new TransactionController();

@@ -11,3 +11,33 @@ router.post('/update', treatmentincontroller.updateTreatmentIn);
 
 router.post('/create', treatmentincontroller.createTreatmentIn);
 module.exports = router;
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     TreatmentProfile:
+ *       type: object
+ *       required:
+ *         - id
+ *         - createdAt
+ *         - updatedAt
+ *       properties:
+ *         id:
+ *           type: integer
+ *           description: The auto-generated id of the TreatmentProfile
+ *         doctorID:
+ *           type: integer
+ *           description: The Doctor ID
+ *         idTreatmentProfile:
+ *           type: integer
+ *           description: The description  
+ *         createdAt:
+ *           type: string
+ *           format: Date
+ *           description: The date created this TreatmentProfile
+ *         updatedAt:
+ *           type: string
+ *           format: Date
+ *           description: The lastest date updated this TreatmentProfile
+ */

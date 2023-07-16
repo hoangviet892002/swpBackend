@@ -1,4 +1,5 @@
 const { google } = require('googleapis');
+const config = require('./config');
 
 class OAuth2 {
   // Các phạm vi (scopes) yêu cầu truy cập từ người dùng
@@ -6,9 +7,9 @@ class OAuth2 {
 
   // Khởi tạo OAuth2 client với thông tin xác thực từ Google API Console
   oauth2Client = new google.auth.OAuth2(
-    '354922586050-p9i3kdtofj323n5vrtnf5f78s4clj049.apps.googleusercontent.com', // Điền Client ID của ứng dụng Google API Console 
-    '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', // Điền Client Secret của ứng dụng Google API Console 
-    'http://localhost:3000/api/auth/google/callback' // Điền đường dẫn callback URL của ứng dụng Google API Console 
+    config.google.clientId,
+    config.google.clientSecret,
+    config.google.redirectUri
   );
 
   // Phương thức để lấy URL xác thực từ Google
