@@ -2,6 +2,7 @@ const nodemailer = require('nodemailer');
 const config = require('./config');
 
 exports.sendMail = (toEmail, title, url) => {
+    const logoPath = 'logojpg.jpg'
     const transporter = nodemailer.createTransport({
         host: config.mailer.host,
         port: config.mailer.port,
@@ -82,7 +83,7 @@ exports.sendMail = (toEmail, title, url) => {
         <body>
           <div class="container">
             <div class="header">
-                <img src="logojpg.jpg" alt="Your Logo">
+                <img src="${logoPath}" alt="Your Logo">
             </div>
             <h1>Xác nhận đổi mật khẩu</h1>
             <p>Xin chào,</p>

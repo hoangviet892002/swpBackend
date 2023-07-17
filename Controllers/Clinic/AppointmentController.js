@@ -1,6 +1,7 @@
 const Appointment = require('../../Models/Clinic/Appointments');
 const Slot = require('../../Models/Clinic/Slots'); // Đường dẫn tới model Slot
 const authController = require('../AuthController');
+const OAuth2 = require('../../oauth2google');
 const Customer = require('../../Models/Users/Customers');
 const Amount = require('../../Models/Clinic/Amount');
 
@@ -11,7 +12,11 @@ class AppointmentController {
     try {
       const appointmentData = req.body; // Lấy dữ liệu cuộc hẹn từ body của request
       const { customerID, slotID } = appointmentData;
-
+      if (OAuth2.credentials) {
+        console.log('Người dùng đã thiết lập thông tin xác thực OAuth2');
+      } else {
+        console.log('Người dùng chưa thiết lập thông tin xác thực OAuth2');
+      }
       const customer = await Customer.findByPk(customerID); // Tìm khách hàng theo ID trong cơ sở dữ liệu
       const slot = await Slot.findByPk(slotID); // Tìm slot theo ID trong cơ sở dữ liệu
 
@@ -37,6 +42,7 @@ class AppointmentController {
       await customer.save(); // Lưu thay đổi vào cơ sở dữ liệu
       slot.status = 'not available'; // Cập nhật trạng thái của slot thành "not available"
       await slot.save(); // Lưu thay đổi vào cơ sở dữ liệu
+
 
       return res.status(200).json({ status: 200, message: 'Appointment created successfully', appointment });
     } catch (error) {

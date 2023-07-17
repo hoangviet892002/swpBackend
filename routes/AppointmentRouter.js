@@ -46,7 +46,7 @@ module.exports = router;
  *           type: string
  *           description: The status of appointment
  *         customerID:
- *           type: string
+ *           type: integer
  *           description: The Customer ID
  *         doctorID:
  *           type: integer

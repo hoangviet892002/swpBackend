@@ -18,7 +18,7 @@ router.get('/google/callback', authController.googleAuthCallBack);
 //ForgetPassword
 router.post('/forgetpassword', authController.forgotPassword);
 //Change Pass
-router.post('/changepass', authController.changepass);
+router.post('/resetpassword', authController.resetPassword);
 //Momo
 router.post('/momo', authController.momo);
 
