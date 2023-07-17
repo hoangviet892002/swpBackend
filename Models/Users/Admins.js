@@ -40,6 +40,14 @@ const Admin = sequelize.define('Admin', {
     type: DataTypes.DATE,
     allowNull: false,
   },
+  resetToken: {
+    type: DataTypes.STRING(255),
+    allowNull: true,
+  },
+  resetTokenExpiration: {
+    type: DataTypes.DATE,
+    allowNull: true,
+  },
   role: {
     type: DataTypes.STRING(50),
     allowNull: false,

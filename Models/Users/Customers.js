@@ -45,6 +45,14 @@ const Customer = sequelize.define('Customer', {
     allowNull: false,
     defaultValue: 'customer',
   },
+  resetToken: {
+    type: DataTypes.STRING(255),
+    allowNull: true,
+  },
+  resetTokenExpiration: {
+    type: DataTypes.DATE,
+    allowNull: true,
+  },
   balance: {
     type: DataTypes.INTEGER,
     allowNull: false,

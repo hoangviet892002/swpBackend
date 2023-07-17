@@ -8,6 +8,7 @@ const Doctor = require('../Models/Users/Doctors');
 const Admin = require('../Models/Users/Admins');
 const Transaction = require('../Models/Clinic/Transaction');
 const OAuth2 = require('../oauth2google');
+const { Op } = require('sequelize');
 
 
 class AuthController {
@@ -111,7 +112,7 @@ class AuthController {
       await user.save();
 
       // Gửi email xác nhận đổi mật khẩu
-      const resetPasswordUrl = `http://your-frontend-url.com/reset-password?token=${resetToken}`;
+      const resetPasswordUrl = `http://localhost:3000/reset-password?token=${resetToken}`;
 
       mailer.sendMail(email, 'Yêu cầu đặt lại mật khẩu', resetPasswordUrl);
 
@@ -128,9 +129,9 @@ class AuthController {
       const { token, password } = req.body;
 
       // Tìm người dùng với mã đặc biệt
-      const customer = await Customer.findOne({ where: { resetToken: token, resetTokenExpiration: { $gt: Date.now() } } });
-      const doctor = await Doctor.findOne({ where: { resetToken: token, resetTokenExpiration: { $gt: Date.now() } } });
-      const admin = await Admin.findOne({ where: { resetToken: token, resetTokenExpiration: { $gt: Date.now() } } });
+      const customer = await Customer.findOne({ where: { resetToken: token, resetTokenExpiration: {[Op.gt]: Date.now() } } });
+      const doctor = await Doctor.findOne({ where: { resetToken: token, resetTokenExpiration: {[Op.gt]: Date.now() } } });
+      const admin = await Admin.findOne({ where: { resetToken: token, resetTokenExpiration: {[Op.gt]: Date.now() } } });
 
       const user = customer || doctor || admin;
 
