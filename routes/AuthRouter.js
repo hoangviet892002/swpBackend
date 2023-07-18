@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const OAuth2 = require('../oauth2google');
 
 const authController = require('../Controllers/AuthController');
 
@@ -11,6 +12,10 @@ router.post('/login', authController.login);
 
 //Login by Google OAuth
 router.get('/google', authController.googleAuth);
+
+router.get('/getgooglecheck', (req, res) => {
+    res.send(OAuth2.credentials);
+});
 
 //Google OAuth Callback
 router.get('/google/callback', authController.googleAuthCallBack);

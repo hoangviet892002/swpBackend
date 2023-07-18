@@ -13,8 +13,11 @@ module.exports = {
         password: "iyvchsfhpwwjequo"
     },
     google: {
-        clientId: '476754856783-bt3di8n3u5c9ket6sagaaht75k451b57.apps.googleusercontent.com',
-        clientSecret: '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',
+        clientId: '476754856783-bampbod6mitashse7ru1r1k9h7fl9ssn.apps.googleusercontent.com',
+        clientSecret: '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',
         redirectUri: 'http://localhost:3000/api/auth/google/callback'
+    },
+    domain: {
+        name: 'localhost'
     }
 }

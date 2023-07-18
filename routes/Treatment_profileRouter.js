@@ -16,10 +16,10 @@ router.get('/schedule', treatmentProfile_Controller.getAllTreatmentProfilesByCus
 router.get('/available', treatmentProfile_Controller.getAllTreatmentProfiles);
 
 //Update treatmentProfile 
-router.put('/updateStatus', treatmentProfile_Controller.updateTreatmentProfile);
+router.put('/updateStatus/:id', treatmentProfile_Controller.updateTreatmentProfile);
 
 //Delete treatmentProfile 
-router.delete('/delete', treatmentProfile_Controller.deleteTreatmentProfile);
+router.delete('/delete/:id', treatmentProfile_Controller.deleteTreatmentProfile);
 
 module.exports = router;
 

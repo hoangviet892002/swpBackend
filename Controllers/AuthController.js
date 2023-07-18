@@ -9,7 +9,7 @@ const Admin = require('../Models/Users/Admins');
 const Transaction = require('../Models/Clinic/Transaction');
 const OAuth2 = require('../oauth2google');
 const { Op } = require('sequelize');
-
+const config = require('../config');
 
 class AuthController {
   async login(req, res) {
@@ -112,7 +112,7 @@ class AuthController {
       await user.save();
 
       // Gửi email xác nhận đổi mật khẩu
-      const resetPasswordUrl = `http://localhost:3000/reset-password?token=${resetToken}`;
+      const resetPasswordUrl = `http://${config.domain.name}:3000/reset-password?token=${resetToken}`;
 
       mailer.sendMail(email, 'Yêu cầu đặt lại mật khẩu', resetPasswordUrl);
 

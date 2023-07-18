@@ -24,7 +24,7 @@ router.post('/update', appointmentController.updateAppointment);
 router.post('/updatedoctor', appointmentController.updateAppointmentDoctor);
 
 //Delete appointment
-router.delete('/delete', appointmentController.deleteAppointment);
+router.delete('/delete/:id', appointmentController.deleteAppointment);
 
 module.exports = router;
 

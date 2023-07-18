@@ -18,7 +18,7 @@ router.get('/details', slotController.getSlotById);
 router.get('/schedule', slotController.getAllSlotsByDoctor);
 
 //Read available slot of doctor by doctor ID 
-router.get('/available', slotController.getAvailableSlotsByDoctor);
+router.get('/available/:doctorID', slotController.getAvailableSlotsByDoctor);
 
 //Update status 
 router.put('/updateStatus', slotController.updateSlotStatus);
@@ -314,13 +314,13 @@ module.exports = router;
 
 /**
  * @swagger
- * /api/slot/available/{id}:
+ * /api/slot/available/{doctorID}:
  *   get:
  *     summary: Get all available slot of Doctor 
  *     tags: [Slot]
  *     parameters:
- *       - in: path
- *         name: doctorId
+ *       - name: doctorID
+ *         in: path
  *         schema:
  *           type: integer
  *         required: true

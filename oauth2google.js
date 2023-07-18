@@ -3,7 +3,7 @@ const config = require('./config');
 
 class OAuth2 {
   // Các phạm vi (scopes) yêu cầu truy cập từ người dùng
-  scopes = ['https://www.googleapis.com/auth/calendar', 'https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'].join(" ");
+  scopes = ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'];
 
   // Khởi tạo OAuth2 client với thông tin xác thực từ Google API Console
   oauth2Client = new google.auth.OAuth2(
@@ -39,39 +39,6 @@ class OAuth2 {
     });
     const userInfo = await oauth2.userinfo.get();
     return userInfo.data;
-  }
-
-
-
-  // Phương thức để tạo sự kiện lịch cho người dùng
-  async createScheduleEvent(summary, description, startTime, endTime) {
-    const calendar = google.calendar({
-      version: "v3",
-      auth: this.oauth2Client
-    });
-
-    await calendar.events.insert({
-      calendarId: "primary",
-      requestBody: {
-        summary: summary,
-        description: description,
-        start: {
-          dateTime: startTime,
-          timeZone: 'Asia/Ho_Chi_Minh'
-        },
-        end: {
-          dateTime: endTime,
-          timeZone: 'Asia/Ho_Chi_Minh'
-        },
-        reminders: {
-          useDefault: false,
-          overrides: [
-            { method: 'email', minutes: 60 },
-            { method: 'popup', minutes: 10 }
-          ]
-        }
-      }
-    });
   }
 }
 

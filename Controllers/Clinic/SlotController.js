@@ -115,7 +115,7 @@ class SlotController {
         where: {
           doctorID: doctorId,
           date: {
-            [Op.between]: [today, threeDaysLater] // Lọc theo khoảng thời gian từ ngày hiện tại đến 3 ngày sau
+            [Op.gte]: today
           }
         }
       });
