@@ -112,7 +112,7 @@ class AuthController {
       await user.save();
 
       // Gửi email xác nhận đổi mật khẩu
-      const resetPasswordUrl = `http://${config.domain.name}:3000/reset-password?token=${resetToken}`;
+      const resetPasswordUrl = `${config.domain.name}/reset-password?token=${resetToken}`;
 
       mailer.sendMail(email, 'Yêu cầu đặt lại mật khẩu', resetPasswordUrl);
 

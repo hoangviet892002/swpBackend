@@ -15,9 +15,9 @@ module.exports = {
     google: {
         clientId: '476754856783-bampbod6mitashse7ru1r1k9h7fl9ssn.apps.googleusercontent.com',
         clientSecret: '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',
-        redirectUri: 'https://tienrang.vercel.app/api/auth/google/callback'
+        redirectUri: 'https://tienrangfpt.vercel.app/api/auth/google/callback'
     },
     domain: {
-        name: 'https://tienrang.vercel.app/'
+        name: 'https://tienrangfpt.vercel.app'
     }
 }
