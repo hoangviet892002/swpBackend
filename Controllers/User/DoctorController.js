@@ -10,6 +10,7 @@ class DoctorController {
   //get Doctor List
   async getAllDoctor(req, res) {
     try {
+      
       const doctors = await Doctor.findAll();
       return res.status(200).json({ doctors: doctors });
     } catch (error) {
