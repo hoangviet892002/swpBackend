@@ -5,7 +5,7 @@ const transactionController = require('../Controllers/Clinic/TransactionControll
 //get 
 router.get('/getall', transactionController.getall);
 
-
+router.get('/get', transactionController.getTransactionByCustomer);
 
 module.exports = router;
 
