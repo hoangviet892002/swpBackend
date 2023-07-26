@@ -4,6 +4,7 @@ const authController = require('../AuthController');
 const OAuth2 = require('../../oauth2google');
 const Customer = require('../../Models/Users/Customers');
 const Amount = require('../../Models/Clinic/Amount');
+const Balance_detail = require('../../Models/Users/balance_detail');
 
 class AppointmentController {
 
@@ -38,6 +39,14 @@ class AppointmentController {
       await customer.save(); // Lưu thay đổi vào cơ sở dữ liệu
       slot.status = 'not available'; // Cập nhật trạng thái của slot thành "not available"
       await slot.save(); // Lưu thay đổi vào cơ sở dữ liệu
+      const balance_detail = await Balance_detail.create({
+        customerID: x,
+        amount: -amountValue,
+        blance: customer.balance, 
+        comment: 'Dat lich',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      });
       return res.status(200).json({ status: 200, message: 'Appointment created successfully', appointment });
     } catch (error) {
       console.error('Error creating appointment:', error);
@@ -157,6 +166,14 @@ class AppointmentController {
 
       customer.balance += amountValue; // Add the amount back to the customer's balance
       await customer.save(); // Save the changes to the customer's balance in the database
+      const balance_detail = await Balance_detail.create({
+        customerID: x,
+        amount: amountValue,
+        blance: customer.balance, 
+        comment: 'Bac si huy lich hen',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      });
 
 
       return res.json(appointment); // Trả về thông tin cuộc hẹn đã được cập nhật dưới dạng JSON

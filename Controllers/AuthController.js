@@ -6,6 +6,7 @@ const customerController = require('./User/CustomerController');
 const Customer = require('../Models/Users/Customers');
 const Doctor = require('../Models/Users/Doctors');
 const Admin = require('../Models/Users/Admins');
+const Balance_detail = require('../Models/Users/balance_detail');
 const Transaction = require('../Models/Clinic/Transaction');
 const OAuth2 = require('../oauth2google');
 const { Op } = require('sequelize');
@@ -195,6 +196,7 @@ class AuthController {
         createdAt: new Date(),
         updatedAt: new Date()
       });
+      
 
       // Kiểm tra cấu trúc của comment: "nap tien x"
       const regex = /^nap tien (\d+)$/;
@@ -217,6 +219,14 @@ class AuthController {
       await Customer.update({ balance: newBalance }, { where: { id: x } });
 
       // Tiếp tục xử lý dữ liệu
+      const balance_detail = await Balance_detail.create({
+        customerID: x,
+        amount: amount,
+        blance: newBalance, 
+        comment: 'nap tien',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      });
 
       res.status(200).json({ message: 'Data received and processed successfully.', newBalance });
     } catch (error) {

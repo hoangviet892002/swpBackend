@@ -7,6 +7,7 @@ router.get('/getall', transactionController.getall);
 
 router.get('/get', transactionController.getTransactionByCustomer);
 
+router.get('/total', transactionController.total);
 module.exports = router;
 
 /**
