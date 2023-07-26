@@ -40,7 +40,7 @@ class AppointmentController {
       slot.status = 'not available'; // Cập nhật trạng thái của slot thành "not available"
       await slot.save(); // Lưu thay đổi vào cơ sở dữ liệu
       const balance_detail = await Balance_detail.create({
-        customerID: x,
+        customerID: customer.id,
         amount: -amountValue,
         blance: customer.balance, 
         comment: 'Dat lich',

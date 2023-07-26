@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const Customer = require('../../Models/Users/Customers');
 const Doctor = require('../../Models/Users/Doctors');
 const Admin = require('../../Models/Users/Admins');
+const Balance_detail = require('../../Models/Users/balance_detail');
 
 class CustomerController {
     async index(req, res) {
@@ -102,7 +103,14 @@ class CustomerController {
 
             // Lưu thay đổi vào cơ sở dữ liệu
             await customer.save();
-
+            const balance_detail = await Balance_detail.create({
+                customerID: customer.id,
+                amount: amount,
+                blance: customer.balance, 
+                comment: 'Admin tru tien',
+                createdAt: new Date(),
+                updatedAt: new Date()
+              });
             return res.status(200).json({ message: 'Trừ tiền thành công' });
         } catch (error) {
             console.error(error);
@@ -126,7 +134,14 @@ class CustomerController {
 
             // Lưu thay đổi vào cơ sở dữ liệu
             await customer.save();
-
+            const balance_detail = await Balance_detail.create({
+                customerID: customer.id,
+                amount: amount,
+                blance: customer.balance, 
+                comment: 'Admin cong tien',
+                createdAt: new Date(),
+                updatedAt: new Date()
+              });
             return res.status(200).json({ message: 'Cộng tiền thành công' });
         } catch (error) {
             console.error(error);
