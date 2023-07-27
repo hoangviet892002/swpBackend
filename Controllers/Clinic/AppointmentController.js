@@ -5,6 +5,7 @@ const OAuth2 = require('../../oauth2google');
 const Customer = require('../../Models/Users/Customers');
 const Amount = require('../../Models/Clinic/Amount');
 const Balance_detail = require('../../Models/Users/balance_detail');
+const { Op } = require('sequelize');
 
 class AppointmentController {
 
@@ -78,8 +79,17 @@ class AppointmentController {
   // READ - Lấy danh sách tất cả các cuộc hẹn
   async getAllAppointments(req, res) {
     try {
-      const appointments = await Appointment.findAll(); // Lấy danh sách tất cả các cuộc hẹn từ cơ sở dữ liệu
-      return res.json(appointments); // Trả về danh sách cuộc hẹn dưới dạng JSON
+      const currentDate = new Date();
+      const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+      const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+      const appointments = await Appointment.findAll({
+        where: {
+          createdAt: {
+            [Op.between]: [firstDayOfMonth, lastDayOfMonth],
+          },
+        },
+      });
+       return res.json(appointments); // Trả về danh sách cuộc hẹn dưới dạng JSON
     } catch (error) {
       console.error('Error retrieving all appointments:', error);
       return res.status(500).json({ error: 'An error occurred while retrieving all appointments' });

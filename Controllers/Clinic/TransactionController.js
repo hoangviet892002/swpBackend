@@ -1,4 +1,6 @@
 const Transaction = require('../../Models/Clinic/Transaction');
+const { Op } = require('sequelize');
+
 
 class TransactionController {
  
