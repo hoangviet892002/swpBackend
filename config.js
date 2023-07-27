@@ -18,6 +18,6 @@ module.exports = {
         redirectUri: 'https://tienrangfpt.vercel.app/api/auth/google/callback'
     },
     domain: {
-        name: 'https://tienrangfpt.vercel.app'
+        name: 'https://toothfairy-three.vercel.app'
     }
 }

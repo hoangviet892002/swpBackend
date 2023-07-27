@@ -17,7 +17,7 @@ const BalanceDetail = sequelize.define('BalanceDetail', {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  balance: {
+  blance: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
