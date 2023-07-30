@@ -12,25 +12,25 @@ const balance = require('./balance_detail');
 
 
 function route(app) {
-    app.use('/api/auth', authRouter);
+    app.use('/auth', authRouter);
 
-    app.use('/api/account', accountRouter);
+    app.use('/account', accountRouter);
 
-    app.use('/api/appointment', appointmentRouter);
+    app.use('/appointment', appointmentRouter);
 
-    app.use('/api/room', roomRouter);
+    app.use('/room', roomRouter);
 
-    app.use('/api/slot', slotRouter);
+    app.use('/slot', slotRouter);
 
-    app.use('/api/treatment_profile', treatment_profileRouter);
+    app.use('/treatment_profile', treatment_profileRouter);
 
-    app.use('/api/treatmentin', treatment_inRouter);
-    app.use('/api/transaction', TransactionRouter);
-    app.use('/api/amount', Amount);
-    app.use('/api/balance', balance);
+    app.use('/treatmentin', treatment_inRouter);
+    app.use('/transaction', TransactionRouter);
+    app.use('/amount', Amount);
+    app.use('/balance', balance);
 
     // api for admin
-    app.use('/api/admin', admin);
+    app.use('/admin', admin);
     
 } 
 
