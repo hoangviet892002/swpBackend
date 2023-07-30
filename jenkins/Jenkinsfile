@@ -1,0 +1,17 @@
+pipeline {
+  agent any
+  stages {
+    stage('Build') {
+      steps {
+        sh 'npm -v'
+        sh 'rm -rf node_modules package-lock.json'
+        sh 'yarn install'
+      }
+    }
+    stage('Deploy') {
+      steps {
+        sh 'pm2 startOrRestart ecosystem.config.js'
+      }
+    }
+  }
+}
