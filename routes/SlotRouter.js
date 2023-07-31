@@ -14,7 +14,7 @@ router.post('/getDoctorByTime', slotController.getAllDoctorBySlot);
 //Read slot by id
 router.get('/details', slotController.getSlotById);
 
-//Read all slot of doctor by doctor ID
+//Read all slot of doctor by doctor ID cmiit
 router.get('/schedule', slotController.getAllSlotsByDoctor);
 
 //Read available slot of doctor by doctor ID 
